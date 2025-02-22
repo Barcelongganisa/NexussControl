@@ -97,7 +97,7 @@
                 <p>PC Name: PC {{ $i }}</p>
                 <p>Status: Online</p>
             </div>
-            <div class="pc-controls">
+            <div class="pc-controls" style="none">
                 <button class="shutdown" title="Shutdown"><i class="fas fa-power-off"></i></button>
                 <button class="restart" title="Restart"><i class="fas fa-sync-alt"></i></button>
                 <button class="startup" title="Startup"><i class="fas fa-play"></i></button>
@@ -109,6 +109,23 @@
     </div>
 </div>
 
+<!-- Small Modal for Advanced Options -->
+<div class="modal fade" id="advOptionsModal" tabindex="-1" aria-labelledby="advOptionsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm"> <!-- Small modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="advOptionsLabel">Advanced Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Configure advanced settings for this PC.</p>
+                <button class="btn btn-primary w-100">Apply Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <button 
         class="absolute top-5 left-5 bg-blue-500 text-white px-4 py-2 rounded"
         id="menuToggle">
@@ -116,4 +133,5 @@
     </button>
 
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </x-app-layout>

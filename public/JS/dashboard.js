@@ -82,16 +82,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // PANG OPEN NG SELECTION SA MGA PC
-document.querySelectorAll('.pc-item').forEach(pc => {
-    pc.addEventListener('click', function() {
-        document.querySelectorAll('.pc-item').forEach(item => {
-            if (item == this) {
-                item.classList.remove('active'); // Hide others
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".pc-item").forEach(pc => {
+        let controls = pc.querySelector(".pc-controls");
+
+        pc.addEventListener("click", function (event) {
+            // Check if the click is inside .pc-controls, ignore it
+            if (event.target.closest(".pc-controls")) return;
+
+            // Toggle the display of controls
+            if (controls.style.display === "none" || controls.style.display === "") {
+                controls.style.display = "flex"; // Show controls
+            } else {
+                controls.style.display = "none"; // Hide controls
             }
         });
-        this.classList.toggle('active');
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const advOptButton = document.querySelectorAll(".adv-opt");
+    const advModal = document.getElementById("advOptionsModal");
+
+    document.querySelectorAll(".pc-controls button").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevents the pc-item from closing when clicking a button
+
+            let action = this.getAttribute("title");
+
+            if (action === "Advanced Options") {
+                // Disable button to prevent multiple clicks
+                this.disabled = true;
+
+                // Open the modal
+                let modal = new bootstrap.Modal(advModal);
+                modal.show();
+
+                // Enable button again when modal is hidden
+                advModal.addEventListener("hidden.bs.modal", () => {
+                    this.disabled = false;
+                }, { once: true }); // { once: true } ensures the event runs only once
+            } else {
+                // Show confirm alert for other actions
+                let confirmAction = confirm(`Do you wish to ${action.toLowerCase()} this PC?`);
+                if (confirmAction) {
+                    alert(`${action} command sent.`);
+                } else {
+                    alert(`${action} canceled.`);
+                }
+            }
+        });
+    });
+});
+
+
+
+
+
 
 
 // PANG SWITCH NG SECTION
@@ -258,21 +305,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ito yung sa controls pag nag n notif 
-document.addEventListener("click", function(event) {
-    const pcItem = event.target.closest(".pc-item"); // Get the specific PC clicked
-    if (!pcItem) return;
 
-    const pcName = pcItem.querySelector(".pc-info p").innerText; // Extract PC name
-
-    if (event.target.closest(".shutdown")) {
-        alert(`Shutting down ${pcName}...`);
-    } else if (event.target.closest(".restart")) {
-        alert(`Restarting ${pcName}...`);
-    } else if (event.target.closest(".startup")) {
-        alert(`Starting up ${pcName}...`);
-    } else if (event.target.closest(".file-transfer")) {
-        alert(`Opening file transfer for ${pcName}...`);
-    } else if (event.target.closest(".adv-opt")) {
-        alert(`Opening advanced options for ${pcName}...`);
-    }
-});
