@@ -125,6 +125,51 @@
     </div>
 </div>
 
+<!-- Logs Section -->
+<div class="logs-container max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10" id="logs-section">
+    <h2 class="text-xl font-semibold mb-4">Logs</h2>
+    
+    <!-- Search and Filter Options -->
+    <div class="logs-filters flex justify-between mb-4">
+        <input type="text" id="logSearch" class="border p-2 w-1/3" placeholder="Search logs...">
+        <select id="logFilter" class="border p-2">
+            <option value="all">All</option>
+            <option value="shutdown">Shutdown</option>
+            <option value="startup">Startup</option>
+            <option value="restart">Restart</option>
+            <option value="file">File Transfer</option>
+        </select>
+    </div>
+
+    <!-- Logs Table -->
+    <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-4">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="bg-gray-200 dark:bg-gray-700 text-left">
+                    <th class="p-2 border">Timestamp</th>
+                    <th class="p-2 border">PC Name</th>
+                    <th class="p-2 border">Action</th>
+                    <th class="p-2 border">Status</th>
+                </tr>
+            </thead>
+            <tbody id="logsTable">
+                <!-- Example log entries (Dynamically populated) -->
+                <tr>
+                    <td class="p-2 border">2025-01-22 14:30:05</td>
+                    <td class="p-2 border">PC 1</td>
+                    <td class="p-2 border">Shutdown</td>
+                    <td class="p-2 border text-red-500">Failed</td>
+                </tr>
+                <tr>
+                    <td class="p-2 border">2025-02-22 14:28:10</td>
+                    <td class="p-2 border">PC 3</td>
+                    <td class="p-2 border">Restart</td>
+                    <td class="p-2 border text-green-500">Success</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
     <button 
         class="absolute top-5 left-5 bg-blue-500 text-white px-4 py-2 rounded"

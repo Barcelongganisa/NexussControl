@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dashCards = document.getElementById("dashCards");
     const monitoringSection = document.getElementById("monitoring-section");
     const controlSection = document.getElementById("control-section"); // Added Control Section
+    const logSection = document.getElementById("logs-section"); // Added Control Section
+
 
     function updateNavVisibility() {
         const screenWidth = window.innerWidth;
@@ -35,6 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ✅ Adjust control-section position when sidebar is toggled
         controlSection.classList.toggle("control-move");
+
+        logSection.classList.toggle("log-move");
+
     });
 
     document.addEventListener("click", function (event) {
@@ -50,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 dashCards.classList.remove("dashCards-move");
                 monitoringSection.classList.remove("monitoring-move");
                 controlSection.classList.remove("control-move");
+                logSection.classList.remove("log-move");
             }
         }
     });
@@ -136,6 +142,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// PARA SA LOGS
+document.addEventListener("DOMContentLoaded", function () {
+    const logSearch = document.getElementById("logSearch");
+    const logFilter = document.getElementById("logFilter");
+    const logsTable = document.getElementById("logsTable");
+
+    logSearch.addEventListener("input", filterLogs);
+    logFilter.addEventListener("change", filterLogs);
+
+    function filterLogs() {
+        let searchQuery = logSearch.value.toLowerCase().replace(/\s+/g, ""); // Remove spaces
+        let filterType = logFilter.value.toLowerCase();
+        
+        Array.from(logsTable.getElementsByTagName("tr")).forEach(row => {
+            let logText = row.innerText.toLowerCase().replace(/\s+/g, ""); // Remove spaces from log text
+            let actionText = row.cells[2]?.innerText.toLowerCase() || ""; // Action column
+            let matchesSearch = logText.includes(searchQuery);
+            let matchesFilter = filterType === "all" || actionText.includes(filterType);
+
+            row.style.display = matchesSearch && matchesFilter ? "" : "none";
+        });
+    }
+});
 
 
 
@@ -146,27 +175,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const dashboardSection = document.getElementById("dashCards");
     const monitoringSection = document.getElementById("monitoring-section");
     const controlSection = document.getElementById("control-section"); // Control Section
+    const logSection = document.getElementById("logs-section"); // Control Section
+
 
     // Sidebar links
     const dashboardLink = document.querySelector("a[href='#dashboard']");
     const monitoringLink = document.querySelector("a[href='#monitoring-section']");
     const controlLink = document.querySelector("a[href='#control-section']"); // Control Section Link
+    const logsLink = document.querySelector("a[href='#logs-section']"); // ✅ Added Logs Link
 
     function showSection(section) {
         if (section === "dashboard") {
             dashboardSection.style.display = "block";
             monitoringSection.style.display = "none";
             controlSection.style.display = "none";
+            logSection.style.display = "none"; // ✅ Hide logs when other sections are shown
         } else if (section === "monitoring") {
             dashboardSection.style.display = "none";
             monitoringSection.style.display = "block";
             controlSection.style.display = "none";
+            logSection.style.display = "none";
         } else if (section === "control") {
             dashboardSection.style.display = "none";
             monitoringSection.style.display = "none";
             controlSection.style.display = "block";
+            logSection.style.display = "none";
+        } else if (section === "logs") {
+            dashboardSection.style.display = "none";
+            monitoringSection.style.display = "none";
+            controlSection.style.display = "none";
+            logSection.style.display = "block"; // ✅ Show logs when logs link is clicked
         }
     }
+
 
     if (dashboardLink) {
         dashboardLink.addEventListener("click", function (e) {
@@ -188,6 +229,12 @@ document.addEventListener("DOMContentLoaded", function () {
             showSection("control");
         });
     }
+    if (logsLink) {
+    logsLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        showSection("logs");
+    });
+}
 
     // Show only the dashboard by default
     showSection("dashboard");

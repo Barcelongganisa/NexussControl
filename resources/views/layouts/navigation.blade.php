@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="block px-4 py-2 rounded hover:bg-gray-700">
+                        <a href="#logs-section" class="block px-4 py-2 rounded hover:bg-gray-700">
                             <i class="fas fa-file-alt"></i> Logs
                         </a>
                     </li>

@@ -115,22 +115,40 @@ ul{
     transform: translateX(110px);
     width: 1756px;
 }
-
-/* button sa topNavbar */
 #topNavbar > div > div > div > div:nth-child(1) > button {
-    border-radius: 10px;
-    background: #007BFF !important;
+    width: 60px; /* Adjust the size */
+    height: 60px;
+    border-radius: 50%; /* Makes it a circle */
+    background: white !important; /* Remove solid background */
     border: none !important;
-    color: white;
-    padding: 5px 10px;
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
     position: relative;
     left: 1335px;
-    top: -25px;
+    top: -35px;
+    overflow: hidden; /* Prevents overflow */
+    font-size: 0;
 }
 
-#topNavbar > div > div > div > div:nth-child(1) > button:hover{
-    background: #0055b1 !important;
+/* Add an image inside the button */
+#topNavbar > div > div > div > div:nth-child(1) > button::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/user.png'); /* Corrected */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Ensures the image covers the button */
+    border-radius: 50%; /* Keeps it circular */
+}
+
+/* Optional: Add a hover effect */
+#topNavbar > div > div > div > div:nth-child(1) > button:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Move button when sidebar is toggled */
@@ -285,9 +303,6 @@ ul{
     gap: 3px;
 }
 
-
-
-
 .pc-controls i {
     margin: 5px;
     cursor: pointer;
@@ -319,17 +334,36 @@ ul{
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+    z-index: 999999;
+}
+
+
+.modal-backdrop {
+    z-index: 99998 !important; /* Keep backdrop behind modal */
+}
+
+.modal-dialog {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100000 !important; /* Make sure it's above all elements */
 }
 
 .modal-content {
+    position: relative;
+    z-index: 100001 !important; /* Ensure content is always above backdrop */
     background: white;
     padding: 20px;
     border-radius: 8px;
+    text-align: center;
     width: 900px;
     height: 900px;
     position: relative;
-    text-align: center;
+    top: -500px;
+    left: -300px;
 }
+
 
 .close-btn {
     position: absolute;
@@ -428,11 +462,6 @@ ul{
     border-radius: 10px;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
-
-/* .chat-modal.show {
-    transform: translateY(0);
-    opacity: 1;
-} */
 
 .chat-modal-content {
     display: flex;
@@ -552,7 +581,107 @@ ul{
     max-width: 90%;
     margin: auto;
     padding: 20px;
-    /* background-color: gray; */
+}
+
+/* FOR LOGS SECTION */
+/* Logs Section Styling */
+
+#logs-section{
+    position: relative;
+    top: 20vh;
+    width: 1500px;
+    left: 185px;
+    transition: transform 0.3s ease-in-out;    
+}
+
+#logs-section.log-move {
+    transform: translateX(-185px); /* Adjust based on sidebar width */
+}
+.logs-container {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.dark .logs-container {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+/* Search & Filter Bar */
+.logs-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logs-filters input,
+.logs-filters select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.logs-filters input:focus,
+.logs-filters select:focus {
+    border-color: #3182ce;
+}
+
+.dark .logs-filters input,
+.dark .logs-filters select {
+    background-color: #4a5568;
+    color: #e2e8f0;
+    border-color: #718096;
+}
+
+/* Logs Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #edf2f7;
+    font-weight: bold;
+}
+
+.dark th {
+    background-color: #4a5568;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dark tr:nth-child(even) {
+    background-color: #2d3748;
+}
+
+/* Status Colors */
+.text-green-500 {
+    color: #38a169; /* Success */
+    font-weight: bold;
+}
+
+.text-red-500 {
+    color: #e53e3e; /* Failed */
+    font-weight: bold;
+}
+
+/* Logs Section Adjustment When Sidebar is Open */
+.logs-move {
+    margin-left: 250px; /* Adjust based on your sidebar width */
 }
 
 
