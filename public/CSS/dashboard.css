@@ -350,7 +350,22 @@ ul{
     z-index: 100000 !important; /* Make sure it's above all elements */
 }
 
+/* MODAL ITO NG MONITORING */
 .modal-content {
+    position: relative;
+    z-index: 100001 !important; /* Ensure content is always above backdrop */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 900px;
+    height: 900px;
+    position: relative;
+    /* top: -500px;
+    left: -300px; */
+}
+/* MODAL ITO NG CONTROL */
+#advOptionsModal .modal-content{
     position: relative;
     z-index: 100001 !important; /* Ensure content is always above backdrop */
     background: white;

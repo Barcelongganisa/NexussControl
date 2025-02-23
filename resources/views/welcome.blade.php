@@ -62,7 +62,7 @@
     <div class="container">
         <!-- Slider Start -->
             <ul class='slider'>
-                <li class='item' style="background-image: url('/images/file handling.jpg')">
+                <li class='item' style="background-image: url('/images/file-handling.jpg')">
                     <div class='content'>
                         <h2 class='title'>File handling</h2>
                         <p class='description'>Download & Upload File Control.</p>
